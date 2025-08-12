@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Albumizr Embed Wrapper</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: transparent;
+    }
+    .wrap {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: transparent;
+    }
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+    }
+    .note {
+      font: 14px/1.4 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", Arial;
+      color: #444;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 8px;
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      max-width: 520px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <iframe id="alb" src="" allow="fullscreen" referrerpolicy="no-referrer" loading="lazy"></iframe>
+    <div class="note">
+      這是 Albumizr 包裝頁。使用方式：在網址後面加上 <code>?src=</code> + 你的 Albumizr <em>iframe 的 src 連結</em>。<br>
+      例：<code>https://你的域名/albumizr-wrapper.html?src=https%3A%2F%2Falbumizr.com%2F...%2Fembed</code><br>
+      注意：如果 Albumizr 內部頁面本身是黑底，父頁面無法強制改成透明。此包裝僅保證父頁面透明與 Notion 兼容。
+    </div>
+  </div>
+  <script>
+    // Read ?src=... and set iframe src
+    const params = new URLSearchParams(location.search);
+    const src = params.get("src");
+    if (src) {
+      document.getElementById("alb").src = src;
+    } else {
+      document.getElementById("alb").srcdoc = '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-family:sans-serif;color:#666;text-align:center;padding:24px">請在網址加上 ?src=Albumizr的iframe來源連結<br><small>例如：?src=https%3A%2F%2Falbumizr.com%2F你的相簿%2Fembed</small></div>';
+    }
+  </script>
+</body>
+</html>

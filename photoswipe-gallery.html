@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transparent Gallery (PhotoSwipe)</title>
+  <!-- Minimal PhotoSwipe v5 via CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/photoswipe@5/dist/photoswipe.css">
+  <style>
+    :root { --gap: 8px; }
+    html, body { margin:0; background: transparent; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--gap);
+      padding: var(--gap);
+      background: transparent;
+    }
+    .grid a {
+      display:block;
+      position:relative;
+      aspect-ratio: 1 / 1;
+      overflow:hidden;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.0); /* fully transparent */
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    .grid img {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Grid thumbnails: replace samples with your images -->
+<div class="grid" id="gallery">
+  <!-- Example item -->
+  <a href="images/large-1.jpg" data-pswp-width="1600" data-pswp-height="1067" target="_blank" rel="noreferrer">
+    <img src="images/thumb-1.jpg" alt="sample 1" loading="lazy">
+  </a>
+
+  <a href="images/large-2.jpg" data-pswp-width="1600" data-pswp-height="1067" target="_blank" rel="noreferrer">
+    <img src="images/thumb-2.jpg" alt="sample 2" loading="lazy">
+  </a>
+
+  <a href="images/large-3.jpg" data-pswp-width="1600" data-pswp-height="1067" target="_blank" rel="noreferrer">
+    <img src="images/thumb-3.jpg" alt="sample 3" loading="lazy">
+  </a>
+</div>
+
+<!-- Root element of PhotoSwipe. Must be at end of body -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+<script type="module">
+  import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5/dist/photoswipe-lightbox.esm.min.js';
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery',
+    children: 'a',
+    pswpModule: () => import('https://unpkg.com/photoswipe@5/dist/photoswipe.esm.min.js'),
+    bgOpacity: 0.95
+  });
+  lightbox.init();
+</script>
+
+</body>
+</html>
